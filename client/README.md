@@ -1,6 +1,6 @@
 # Sqlbro client
 
-[![pub package](https://img.shields.io/npm/v/sqlbro)](https://www.npmjs.com/package/sqlbro)
+[![pub package](https://img.shields.io/npm/v/@sqlbro/client)](https://www.npmjs.com/package/@sqlbro/client)
 
 A tiny wrapper around [sql.js-httpvfs](https://github.com/phiresky/sql.js-httpvfs) to query
 read only public Sqlite databases from the browser:
