@@ -1,0 +1,193 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "name": "Food",
+      "slug": "food",
+      "icon": "zondicons:location-food",
+      "parentId": null
+    },
+    {
+      "id": 2,
+      "name": "Drinks",
+      "slug": "drinks",
+      "icon": "uil:glass",
+      "parentId": null
+    },
+    {
+      "id": 3,
+      "name": "Soft drinks",
+      "slug": "soft_drinks",
+      "icon": "cil:drink",
+      "parentId": 2
+    },
+    {
+      "id": 4,
+      "name": "Beers",
+      "slug": "beers",
+      "icon": "ion:beer-outline",
+      "parentId": 2
+    },
+    {
+      "id": 5,
+      "name": "Champagnes",
+      "slug": "champagnes",
+      "icon": "game-icons:champagne-cork",
+      "parentId": 2
+    },
+    {
+      "id": 6,
+      "name": "Alcools",
+      "slug": "alcools",
+      "icon": "fa6-solid:champagne-glasses",
+      "parentId": 2
+    },
+    {
+      "id": 7,
+      "name": "Whiskies",
+      "slug": "whiskies",
+      "icon": "icon-park-outline:bottle-two",
+      "parentId": 2
+    },
+    {
+      "id": 8,
+      "name": "Rhums",
+      "slug": "rhums",
+      "icon": "ri:ink-bottle-line",
+      "parentId": 2
+    },
+    {
+      "id": 9,
+      "name": "Cocktails",
+      "slug": "cocktails",
+      "icon": "bx:drink",
+      "parentId": 2
+    },
+    {
+      "id": 10,
+      "name": "Wines",
+      "slug": "wines",
+      "icon": "fluent:drink-wine-16-regular",
+      "parentId": 2
+    }
+  ],
+  "beers": [
+    {
+      "name": "Tigre Bock",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+      "props": {
+        "alcool": 5.5,
+        "price25": 4,
+        "price50": 7.5
+      }
+    },
+    {
+      "name": "Pietra",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+      "props": {
+        "alcool": 6,
+        "price25": 4.5,
+        "price50": 8.5
+      }
+    },
+    {
+      "name": "Ipa Brooklyn Defender ",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+      "props": {
+        "alcool": 5.5,
+        "price25": 4.5,
+        "price50": 8.5
+      }
+    },
+    {
+      "name": "Guiness",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+      "props": {
+        "alcool": 5,
+        "price25": null,
+        "price50": 9
+      }
+    },
+    {
+      "name": "Ipa Cloudy Job",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+      "props": {
+        "alcool": 5.8,
+        "price25": 4.5,
+        "price50": 8.5
+      }
+    },
+    {
+      "name": "Cider Finnbarra",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+      "props": {
+        "alcool": 5,
+        "price25": 4.5,
+        "price50": 8.5
+      }
+    },
+    {
+      "name": "Kwak",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+      "props": {
+        "alcool": 8.4,
+        "price25": 4.5,
+        "price50": 8.5
+      }
+    },
+    {
+      "name": "Grimbergen blonde",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+      "props": {
+        "alcool": 6.7,
+        "price25": 4.5,
+        "price50": 8.5
+      }
+    },
+    {
+      "name": "1664 blanche",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+      "props": {
+        "alcool": 5,
+        "price25": 4.5,
+        "price50": 8.5
+      }
+    },
+    {
+      "name": "La Bête rouge",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+      "props": {
+        "alcool": 8,
+        "price25": 4.5,
+        "price50": 8.5
+      }
+    },
+    {
+      "name": "Ducasse",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+      "props": {
+        "alcool": 9,
+        "price25": 4.5,
+        "price50": 8.5
+      }
+    },
+    {
+      "name": "La bête des Vosges",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+      "props": {
+        "alcool": 8,
+        "price25": 4.5,
+        "price50": 8.5
+      }
+    },
+    {
+      "name": "Carlsberg Elephant",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+      "props": {
+        "alcool": 7.2,
+        "price25": 4.5,
+        "price50": 8.5
+      }
+    }
+  ]
+}
