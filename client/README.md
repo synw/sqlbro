@@ -33,20 +33,15 @@ initDb()
 Params and types:
 
 ```ts
-function initDb(dbUrl?: string, workerUrl?: URL, wasmUrl?: URL): Promise<void>
+function initDb(baseUrl?: string, dbName?: string): Promise<void>
 ```
 
 Default values for the `initDb` params:
 
 ```ts
-dbUrl = "db.sqlite",
-workerUrl = new URL("/assets/sqlite.worker.js", import.meta.url),
-wasmUrl = new URL("/assets/sql-wasm.wasm", import.meta.url)
+baseUrl = window.document.baseURI + "assets/"
+dbName = "db.sqlite",
 ```
-
-- `workerUrl`: by default located in `/assets/sqlite.worker.js`
-- `wasmUrl`: by default located in `/assets/sql-wasm.wasm`
-- `dbUrl`: the url is relative to the location of the files above. By default located in `/assets/db.sqlite`
 
 Example of initialization with different params:
 
@@ -54,9 +49,8 @@ Example of initialization with different params:
 import { initDb } from "@sqlbro/client";
 
 initDb(
+  window.document.baseURI + '/static',
   "db/mydb.sqlite", // the db is in /static/db/mydb.sqlite
-  workerUrl = new URL("/static/sqlite.worker.js", import.meta.url),
-  wasmUrl = new URL("/static/sql-wasm.wasm", import.meta.url)
 )
 ```
 
@@ -163,3 +157,7 @@ const data: Array<Product> = await query(
   "SELECT id,name,description FROM products"
 )
 ```
+
+## Example
+
+An [example](example) is available with a basic query and a json query

@@ -6,9 +6,8 @@ let setDbReady: (value: boolean) => void;
 let isDbReady = new Promise<boolean>((r) => setDbReady = r);
 
 async function initDb(
-  dbUrl = "db.sqlite",
-  workerUrl = new URL("/assets/sqlite.worker.js", import.meta.url),
-  wasmUrl = new URL("/assets/sql-wasm.wasm", import.meta.url)
+  baseUrl = window.document.baseURI + "assets/",
+  dbName = "db.sqlite",
 ) {
   worker = await createDbWorker(
     [
@@ -16,13 +15,13 @@ async function initDb(
         from: "inline",
         config: {
           serverMode: "full",
-          url: dbUrl,
+          url: baseUrl + dbName,
           requestChunkSize: 4096,
         },
       },
     ],
-    workerUrl.toString(),
-    wasmUrl.toString()
+    baseUrl + "sqlite.worker.js",
+    baseUrl + "sql-wasm.wasm"
   );
   setDbReady(true)
 }

@@ -7,7 +7,7 @@
     "sourceMap": false,
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "declaration": true,
+    "declaration": false,
     "allowSyntheticDefaultImports": true,
     //"isolatedModules": true,
     "outDir": "./dist",

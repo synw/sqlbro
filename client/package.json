@@ -1,11 +1,11 @@
 {
   "name": "@sqlbro/client",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Query a public read only Sqlite database in the browser",
   "repository": "https://github.com/synw/sqlbro/client",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && rm -f dist/db.d.ts && cp src/db.d.ts dist",
+    "build": "vite build && cp src/db.d.ts dist",
     "serve": "vite preview"
   },
   "dependencies": {
