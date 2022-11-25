@@ -160,4 +160,4 @@ const data: Array<Product> = await query(
 
 ## Example
 
-An [example](example) is available with a basic query and a json query
+An [example](https://github.com/synw/sqlbro/tree/main/example) is available with a basic query and a json query
