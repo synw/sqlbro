@@ -7,8 +7,6 @@ Tooling to quickly prototype Sqlite databases in Nodejs
 ## Install
 
 ```bash
-yarn add @sqlbro/builder
-# or
 npm install @sqlbro/builder
 ```
 

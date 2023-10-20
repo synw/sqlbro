@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { readJsonFile, initDb, db, execute, insertJson } from "@sqlbro/builder";
+import { readJsonFile, initDb, db, execute, insertJson } from "../../../builder/src/index";
 import { schemas } from "./schemas";
 
 async function main() {
@@ -10,12 +10,28 @@ async function main() {
   // initialize the new database
   initDb(dbPath, schemas);
   // load data from json
-  const jsonData = await readJsonFile(__dirname + "/../data.json");
+  const jsonData = readJsonFile(__dirname + "/../data.json");
   // fill the category table
   insertJson("category", jsonData["categories"]);
+  console.log("Categories created")
   // grab the beers category id
-  let sql = 'SELECT * from category WHERE slug="beers"';
-  db.all(sql, [], (err, rows) => {
+  let sql = "SELECT * from category WHERE slug='beers'";
+  const stmt = db.prepare(sql);
+  const rows = stmt.all() as Array<Record<string, any>>;
+  const cid = rows[0].id;
+  // fill the products table with beers data
+  insertJson(
+    "product",
+    jsonData["beers"],
+    true, // auto id
+    (line) => {
+      // append the category id
+      line.push(cid)
+      return line
+    }
+  );
+
+  /*db.all(sql, [], (err, rows) => {
     if (err) {
       throw err;
     }
@@ -31,7 +47,7 @@ async function main() {
         return line
       }
     );
-  });
+  });*/
 }
 
 (async () => {
