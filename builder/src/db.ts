@@ -1,61 +1,78 @@
-import DatabaseConstructor, { Database } from "better-sqlite3";
+import { Database } from "better-sqlite3";
 
 
-let db: Database = new DatabaseConstructor("");
-let setDbReady: (value: boolean) => void;
-let isDbReady = new Promise<boolean>((r) => setDbReady = r);
+class DbBuilder {
+  db: Database;
+  _isDbReady = false;
+  _isVerbose = true;
 
-function initDb(path: string, schemas: Array<string>, verbose = true) {
-  const opts = verbose ? { verbose: console.log } : {};
-  db = new DatabaseConstructor(path, opts);
-  schemas.forEach((s) => db.exec(s));
-  setDbReady(true)
-}
+  constructor(db: Database, verbose = true) {
+    this.db = db;
+    this._isVerbose = verbose;
+  }
 
-function insertJson(
-  table: string,
-  data: Array<Record<string, any>>,
-  autoId = false,
-  transform?: (row: Array<string | number>) => Array<string | number>
-) {
-  const rows = new Array<string>();
-  let i = 1;
-  data.forEach((row) => {
-    let line = new Array<string | number>();
-    if (autoId) {
-      line.push(i)
-    }
-    Object.values(row).forEach((_c) => {
-      if (!_c) {
-        line.push("NULL")
-      } else {
-        //console.log(typeof _c)
-        switch (typeof _c) {
-          case "object":
-            line.push(`'${JSON.stringify(_c)}'`)
-            break;
-          case "number":
-            line.push(_c)
-            break;
-          default:
-            line.push(`'${_c}'`)
-            break;
-        }
+  get isDbReady(): boolean {
+    return this._isDbReady
+  }
+
+  init(schemas: Array<string>): DbBuilder {
+    schemas.forEach((s) => {
+      this.db.exec(s);
+      if (this._isVerbose) {
+        console.log(`Schema executed: ${s}`)
       }
     });
-    if (transform) {
-      line = transform(line)
-    }
-    rows.push('(' + line.join() + ')')
-    ++i;
-    //console.log("ROW", line)
-  });
-  const q = `INSERT INTO ${table} VALUES ${rows.join(',\n')}`;
-  console.log("Q", q);
-  //const stmt = db.prepare(q)
-  //stmt.run();
-  db.exec(q)
-  console.log("OK, database built")
+    this._isDbReady = true;
+    return this
+  }
+
+  insertJson(
+    table: string,
+    data: Array<Record<string, any>>,
+    autoId = false,
+    transform?: (row: Array<string | number>) => Array<string | number>
+  ): DbBuilder {
+    const rows = new Array<string>();
+    let i = 1;
+    data.forEach((row) => {
+      let line = new Array<string | number>();
+      if (autoId) {
+        line.push(i)
+      }
+      Object.values(row).forEach((_c) => {
+        if (!_c) {
+          line.push("NULL")
+        } else {
+          //console.log(typeof _c)
+          switch (typeof _c) {
+            case "object":
+              line.push(`'${JSON.stringify(_c)}'`)
+              break;
+            case "number":
+              line.push(_c)
+              break;
+            default:
+              line.push(`'${_c}'`)
+              break;
+          }
+        }
+      });
+      if (transform) {
+        line = transform(line)
+      }
+      rows.push('(' + line.join() + ')')
+      ++i;
+      //console.log("ROW", line)
+    });
+    const q = `INSERT INTO ${table} VALUES ${rows.join(',\n')}`;
+    console.log("Q", q);
+    //const stmt = db.prepare(q)
+    //stmt.run();
+    this.db.exec(q)
+    console.log("OK, database built")
+    return this
+  }
 }
 
-export { db, initDb, insertJson, isDbReady }
+
+export { DbBuilder }

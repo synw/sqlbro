@@ -39,10 +39,12 @@ const schemas = [
 Initialize the database:
 
 ```ts
-import { initDb } from "@sqlbro/builder";
+import DatabaseConstructor from "better-sqlite3";
+import { readJsonFile, DbBuilder, execute } from "@sqlbro/builder";
 
 const dbPath = "/some/path/db.sqlite";
-initDb(dbPath, schemas);
+const db = new DatabaseConstructor(dbPath);
+const builder = new DbBuilder(db).init(schemas);
 ```
 
 ### Insert data
@@ -58,9 +60,7 @@ const jsonData = await readJsonFile(__dirname + "/data.json");
 Insert into the database from the json data:
 
 ```ts
-import { insertJson } from "@sqlbro/builder";
-
-insertJson("category", jsonData["categories"]);
+builder.insertJson("category", jsonData["categories"]);
 ```
 
 This will parse the json and convert the rows to an insert query. Possible data types:
