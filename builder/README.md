@@ -49,12 +49,16 @@ const builder = new DbBuilder(db).init(schemas);
 
 ### Insert data
 
-Read a json file:
+Read `Record<string, Array<Record<string, any>>>` objects in a json file:
 
 ```ts
-import { readJsonFile } from "@sqlbro/builder";
+const jsonData = await builder.readJsonFileObjects(__dirname + "/data.json");
+```
 
-const jsonData = await readJsonFile(__dirname + "/data.json");
+Or read `Array<Record<string, any>>` objects in a json file:
+
+```ts
+const jsonData = await builder.readJsonFileArray(__dirname + "/data.json");
 ```
 
 Insert into the database from the json data:

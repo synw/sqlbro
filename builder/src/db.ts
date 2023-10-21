@@ -1,14 +1,15 @@
+import fs from 'fs';
 import { Database } from "better-sqlite3";
 
 
 class DbBuilder {
   db: Database;
   _isDbReady = false;
-  _isVerbose = true;
+  isVerbose = true;
 
   constructor(db: Database, verbose = true) {
     this.db = db;
-    this._isVerbose = verbose;
+    this.isVerbose = verbose;
   }
 
   get isDbReady(): boolean {
@@ -18,7 +19,7 @@ class DbBuilder {
   init(schemas: Array<string>): DbBuilder {
     schemas.forEach((s) => {
       this.db.exec(s);
-      if (this._isVerbose) {
+      if (this.isVerbose) {
         console.log(`Schema executed: ${s}`)
       }
     });
@@ -33,11 +34,10 @@ class DbBuilder {
     transform?: (row: Array<string | number>) => Array<string | number>
   ): DbBuilder {
     const rows = new Array<string>();
-    let i = 1;
     data.forEach((row) => {
       let line = new Array<string | number>();
       if (autoId) {
-        line.push(i)
+        line.push("NULL")
       }
       Object.values(row).forEach((_c) => {
         if (!_c) {
@@ -61,16 +61,24 @@ class DbBuilder {
         line = transform(line)
       }
       rows.push('(' + line.join() + ')')
-      ++i;
       //console.log("ROW", line)
     });
     const q = `INSERT INTO ${table} VALUES ${rows.join(',\n')}`;
-    console.log("Q", q);
-    //const stmt = db.prepare(q)
-    //stmt.run();
+    if (this.isVerbose) {
+      console.log(q);
+    }
     this.db.exec(q)
-    console.log("OK, database built")
     return this
+  }
+
+  readJsonFileObjects(path: string): Record<string, Array<Record<string, any>>> {
+    const data: Record<string, Array<Record<string, any>>> = JSON.parse(fs.readFileSync(path).toString());
+    return data
+  }
+
+  readJsonFileArray(path: string): Array<Record<string, any>> {
+    const data: Array<Record<string, any>> = JSON.parse(fs.readFileSync(path).toString());
+    return data
   }
 }
 
