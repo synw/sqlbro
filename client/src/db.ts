@@ -6,7 +6,7 @@ let setDbReady: (value: boolean) => void;
 let isDbReady = new Promise<boolean>((r) => setDbReady = r);
 
 async function initDb(
-  baseUrl = window.document.baseURI + "assets/",
+  baseUrl = window.location.origin + "assets/",
   dbName = "db.sqlite",
 ) {
   worker = await createDbWorker(
