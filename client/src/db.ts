@@ -26,6 +26,20 @@ async function initDb(
   setDbReady(true)
 }
 
+async function initDbConfig(baseUrl = window.location.origin + "assets/", fileName = "config.json") {
+  worker = await createDbWorker(
+    [
+      {
+        from: "jsonconfig",
+        configUrl: fileName
+      },
+    ],
+    baseUrl + "sqlite.worker.js",
+    baseUrl + "sql-wasm.wasm"
+  );
+  setDbReady(true)
+}
+
 async function query<T = Array<Record<string, any>>>(q: string): Promise<T> {
   if (!worker) {
     console.warn("Waiting for db initialization before querying")
@@ -34,4 +48,4 @@ async function query<T = Array<Record<string, any>>>(q: string): Promise<T> {
   return (await worker.db.query(q)) as T;
 }
 
-export { initDb, query, isDbReady }
+export { initDb, initDbConfig, query, isDbReady }
