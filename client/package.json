@@ -1,6 +1,6 @@
 {
   "name": "@sqlbro/client",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Query a public read only Sqlite database in the browser",
   "repository": "https://github.com/synw/sqlbro/client",
   "scripts": {
